@@ -50,5 +50,4 @@ export class ColumnsController {
   async deleteColumnById(@Param('id') id: number) {
     return this.columnsService.deleteColumn(id)
   }
-
 }

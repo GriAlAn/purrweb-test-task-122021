@@ -13,8 +13,8 @@ export class ColumnsService {
 
   async createColumn(dto: CreateColumnDto, token: string) {
     const userId = Number(this.authService.getUserIdByToken(token));
-    const column = await this.columnRepository.create(dto);
     const user = await this.userRepository.findByPk(userId);
+    const column = await this.columnRepository.create(dto);
     await column.$set('user', userId);
     column.user = user;
     return column;

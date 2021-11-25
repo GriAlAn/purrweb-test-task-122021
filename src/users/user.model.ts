@@ -1,5 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Column, DataType, HasMany, Model, Table } from 'sequelize-typescript';
+import { Card } from 'src/cards/card.model';
 import { Column as _Column } from '../columns/column.model';
 
 interface UserCreationProps {
@@ -23,4 +24,8 @@ export class User extends Model<User, UserCreationProps> {
 
   @HasMany(() => _Column)
   columns: _Column[]
+
+
+  @HasMany(() => Card)
+  cards: Card[]
 }
