@@ -32,7 +32,6 @@ export class CardsService {
     const card = await this.cardRepository.findByPk(id);
     await card.update(dto);
     return card.save();
-
   }
 
   async deleteCard(id: number) {
