@@ -1,6 +1,8 @@
-import { Body, Controller, Delete, Get, Param, Put, Req, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, Req, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
+import { AuthGuard } from 'src/auth/auth-guard';
+import { ColumnBelongsToUserGuard } from './column-belongs-to-user-guard';
 import { Column } from './column.model';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
@@ -14,6 +16,7 @@ export class ColumnsController {
 
   @ApiOperation({summary: 'Create column'})
   @ApiResponse({status: 200, type: Column})
+  @UseGuards(AuthGuard)
   @Post()
   async createColumn(@Req() request: Request, @Body() createColumnDto: CreateColumnDto) {
     const token = request.headers.authorization.split(' ')[1]
@@ -38,6 +41,7 @@ export class ColumnsController {
   @ApiOperation({summary: 'Update column'})
   @ApiResponse({status: 200, type: Column})
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for column'})
+  @UseGuards(AuthGuard, ColumnBelongsToUserGuard)
   @Put(':id')
   updateColumnById(@Param('id') id: number, @Body() updateColumnDto: UpdateColumnDto) {
     return this.columnsService.updateColumn(id, updateColumnDto);
@@ -46,6 +50,7 @@ export class ColumnsController {
   @ApiOperation({summary: 'Delete column'})
   @ApiResponse({status: 200})
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for column'})
+  @UseGuards(AuthGuard, ColumnBelongsToUserGuard)
   @Delete(':id')
   async deleteColumnById(@Param('id') id: number) {
     return this.columnsService.deleteColumn(id)
