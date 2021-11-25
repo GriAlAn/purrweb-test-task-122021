@@ -12,11 +12,11 @@ export class Card extends Model<Card, CardCreationProps> {
   @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
 
-  @ApiProperty({example: 'Card', description: 'Card title'})
+  @ApiProperty({example: 'Title', description: 'Card title'})
   @Column({type: DataType.STRING, allowNull: false})
   title: string;
 
-  @ApiProperty({example: 'Title', description: 'Card body'})
+  @ApiProperty({example: 'Body', description: 'Card body'})
   @Column({type: DataType.STRING, allowNull: true})
   body: string;
 
