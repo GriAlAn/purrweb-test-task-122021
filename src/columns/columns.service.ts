@@ -4,6 +4,7 @@ import { AuthService } from '../auth/auth.service';
 import { User } from '../users/user.model';
 import { Column } from './column.model';
 import { CreateColumnDto } from './dto/create-column.dto';
+import { UpdateColumnDto } from './dto/update-column.dto';
 
 @Injectable()
 export class ColumnsService {
@@ -19,17 +20,18 @@ export class ColumnsService {
     return column;
   }
 
-  getOneColumn(id: number) {
-    return this.columnRepository.findByPk(id);
+  async getOneColumn(id: number) {
+    return await this.columnRepository.findByPk(id);
   }
 
-  getAllColumns() {
-    return this.columnRepository.findAll();
+  async getAllColumns() {
+    return await this.columnRepository.findAll();
   }
 
-  updateColumn(id: number) {
-    const column = this.columnRepository.findByPk(id);
-
+  async updateColumn(id: number, dto: UpdateColumnDto) {
+    const column = await this.columnRepository.findByPk(id);
+    await column.update(dto)
+    return column.save()
 
   }
 

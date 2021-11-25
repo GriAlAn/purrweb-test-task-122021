@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, Put, Req, Post } from '@nestjs/co
 import { Request } from 'express';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
+import { UpdateColumnDto } from './dto/update-column.dto';
 
 @Controller('columns')
 export class ColumnsController {
@@ -25,8 +26,8 @@ export class ColumnsController {
   }
 
   @Put(':id')
-  updateColumnById(@Param('id') id: number) {
-    return this.columnsService.updateColumn(id);
+  updateColumnById(@Param('id') id: number, @Body() updateColumnDto: UpdateColumnDto) {
+    return this.columnsService.updateColumn(id, updateColumnDto);
   }
 
   @Delete(':id')
