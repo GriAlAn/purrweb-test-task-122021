@@ -13,6 +13,9 @@ import { ColumnsService } from './columns.service';
     SequelizeModule.forFeature([User, Column]),
     AuthModule,
   ],
+  exports: [
+    ColumnsService,
+  ],
 })
 export class ColumnsModule {
 }

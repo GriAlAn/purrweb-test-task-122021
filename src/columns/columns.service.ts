@@ -28,15 +28,24 @@ export class ColumnsService {
     return await this.columnRepository.findAll();
   }
 
+  async getColumnsByUser(user: User) {
+    return this.columnRepository.findAll({where: {userId: user.id}});
+  }
+
   async updateColumn(id: number, dto: UpdateColumnDto) {
     const column = await this.columnRepository.findByPk(id);
-    await column.update(dto)
-    return column.save()
+    await column.update(dto);
+    return column.save();
 
   }
 
   async deleteColumn(id: number) {
-    const column = this.columnRepository.findByPk(id);
-    return (await column).destroy();
+    const column = await this.columnRepository.findByPk(id);
+    return column.destroy();
+  }
+
+  async deleteColumnByUser(id: number, user: User) {
+    const column = await this.columnRepository.findOne({where: {userId: user.id, id: id}});
+    return column.destroy();
   }
 }

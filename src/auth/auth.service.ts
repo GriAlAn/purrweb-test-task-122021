@@ -1,5 +1,6 @@
 import { HttpException, HttpStatus, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Request } from 'express';
 import { CreateUserDto } from 'src/users/dto/create-user.dto';
 import { UsersService } from 'src/users/users.service';
 import * as bcrypt from 'bcryptjs';
@@ -29,6 +30,13 @@ export class AuthService {
   getUserIdByToken(_token: string): number {
     const token = this.jwtService.decode(_token, {json: true}) as {id: number};
     return token.id;
+  }
+
+  async getUserByRequest(request: Request): Promise<User> {
+    const token = request.headers.authorization.split(' ')[1]
+    const userId = Number(this.getUserIdByToken(token));
+    const user = this.userService.getUserById(userId);
+    return user;
   }
 
   private async generateToken(user: User) {
