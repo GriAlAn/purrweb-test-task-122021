@@ -1,8 +1,8 @@
 import { Body, Controller, Delete, Get, Param, Put, Req, Post, UseGuards } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
-import { AuthGuard } from 'src/auth/auth-guard';
-import { ColumnBelongsToUserGuard } from './column-belongs-to-user-guard';
+import { AuthGuard } from 'src/auth/auth.guard';
+import { ColumnBelongsToUserGuard } from './column-belongs-to-user.guard';
 import { Column } from './column.model';
 import { ColumnsService } from './columns.service';
 import { CreateColumnDto } from './dto/create-column.dto';
