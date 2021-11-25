@@ -26,6 +26,11 @@ export class AuthService {
     return this.generateToken(user);
   }
 
+  getUserIdByToken(_token: string): number {
+    const token = this.jwtService.decode(_token, {json: true}) as {id: number};
+    return token.id;
+  }
+
   private async generateToken(user: User) {
     const payload = {email: user.email, id: user.id};
     return {
