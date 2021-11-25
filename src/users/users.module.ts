@@ -6,14 +6,15 @@ import { User } from './user.model';
 import { AuthModule } from '../auth/auth.module';
 
 @Module({
-    controllers: [UsersController],
-    providers: [UsersService],
-    imports: [
-        SequelizeModule.forFeature([User]),
-        forwardRef(() => AuthModule),
-    ],
-    exports: [
-        UsersService,
-    ]
+  controllers: [UsersController],
+  providers: [UsersService],
+  imports: [
+    SequelizeModule.forFeature([User]),
+    forwardRef(() => AuthModule),
+  ],
+  exports: [
+    UsersService,
+  ],
 })
-export class UsersModule {}
+export class UsersModule {
+}
