@@ -10,11 +10,11 @@ import { Request } from 'express';
 import { Observable } from 'rxjs';
 import { JwtService } from '@nestjs/jwt';
 import { User } from 'src/users/user.model';
-import { UsersService } from '../users/users.service';
+import { ColumnsService } from './columns.service';
 
 @Injectable()
 export class ColumnBelongsToUserGuard implements CanActivate {
-  constructor(private jwtService: JwtService, private usersService: UsersService) {
+  constructor(private jwtService: JwtService, private columnsService: ColumnsService) {
   }
 
   canActivate(context: ExecutionContext): boolean | Promise<boolean> | Observable<boolean> {
@@ -30,7 +30,7 @@ export class ColumnBelongsToUserGuard implements CanActivate {
 
       const user = this.jwtService.verify<User>(token);
       const columnId = Number(request.params.id);
-      return this.usersService.isColumnBelongsToUser(user.id, columnId);
+      return this.columnsService.isColumnBelongsToUser(user.id, columnId);
     } catch (e) {
       throw new UnauthorizedException('User not authorized');
     }

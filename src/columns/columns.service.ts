@@ -48,4 +48,9 @@ export class ColumnsService {
     const column = await this.columnRepository.findOne({where: {userId: user.id, id: id}});
     return column.destroy();
   }
+
+  async isColumnBelongsToUser(columnId: number, userId: number) {
+    const column = await this.columnRepository.findOne({where: {id: columnId}, include: {all: true}})
+    return column.user.id === userId;
+  }
 }

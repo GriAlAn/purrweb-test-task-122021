@@ -23,11 +23,6 @@ export class UsersService {
     return user;
   }
 
-  async isColumnBelongsToUser(userId: number, columnId: number) {
-    const user = await this.userRepository.findOne({where: {id: userId}, include: {all: true}})
-    return user.columns.some(column => column.id === columnId);
-  }
-
   async getUserByEmail(email: string) {
     const user = await this.userRepository.findOne({where: {email}});
     return user;
