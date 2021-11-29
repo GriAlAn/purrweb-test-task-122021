@@ -1,14 +1,11 @@
 import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/sequelize';
-import { AuthService } from '../auth/auth.service';
-import { User } from '../users/user.model';
 import { Card } from './card.model';
-import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 
 @Injectable()
 export class CardsService {
-  constructor(@InjectModel(Card) private cardRepository: typeof Card, @InjectModel(User) private userRepository: typeof User) {
+  constructor(@InjectModel(Card) private cardRepository: typeof Card) {
   }
 
   async getOneCard(id: number) {
