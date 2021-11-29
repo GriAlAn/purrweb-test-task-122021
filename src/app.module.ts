@@ -10,6 +10,7 @@ import { UserColumnsModule } from './user-columns/user-columns.module';
 import { CardsModule } from './cards/cards.module';
 import { Card } from './cards/card.model';
 import { ColumnCardsModule } from './column-cards/column-cards.module';
+import { CommentsModule } from './comments/comments.module';
 
 @Module({
   controllers: [],
@@ -34,6 +35,7 @@ import { ColumnCardsModule } from './column-cards/column-cards.module';
     UserColumnsModule,
     CardsModule,
     ColumnCardsModule,
+    CommentsModule,
   ],
 })
 export class AppModule {
