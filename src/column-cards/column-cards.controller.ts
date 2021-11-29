@@ -6,7 +6,7 @@ import { Card } from '../cards/card.model';
 import { CreateCardDto } from '../cards/dto/create-card.dto';
 import { ColumnCardsService } from './column-cards.service';
 
-@ApiTags('Column Cards')
+@ApiTags('Column cards')
 @Controller('columns')
 export class ColumnCardsController {
   constructor(private columnCardsService: ColumnCardsService) {
