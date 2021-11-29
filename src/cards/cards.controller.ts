@@ -1,11 +1,10 @@
 import { Body, Controller, Delete, Get, Param, Post, Put, Req } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { Request } from 'express';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Card } from './card.model';
 import { CardsService } from './cards.service';
-import { CreateCardDto } from './dto/create-card.dto';
 import { UpdateCardDto } from './dto/update-card.dto';
 
+@ApiTags('Cards')
 @Controller('cards')
 export class CardsController {
   constructor(private cardsService: CardsService) {

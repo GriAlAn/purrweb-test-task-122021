@@ -22,4 +22,9 @@ export class ColumnCardsService {
     card.column = column;
     return card;
   }
+
+  async getAllCardsForColumn(columnId: number) {
+    const cards = await this.cardRepository.findAll({where: {columnId}})
+    return cards;
+  }
 }
