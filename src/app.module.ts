@@ -11,6 +11,7 @@ import { CardsModule } from './cards/cards.module';
 import { Card } from './cards/card.model';
 import { ColumnCardsModule } from './column-cards/column-cards.module';
 import { CommentsModule } from './comments/comments.module';
+import { CardCommentsModule } from './card-comments/card-comments.module';
 
 @Module({
   controllers: [],
@@ -36,6 +37,7 @@ import { CommentsModule } from './comments/comments.module';
     CardsModule,
     ColumnCardsModule,
     CommentsModule,
+    CardCommentsModule,
   ],
 })
 export class AppModule {
