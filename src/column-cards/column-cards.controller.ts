@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post, Req } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Post, Req } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { Card } from '../cards/card.model';
@@ -15,7 +15,7 @@ export class ColumnCardsController {
   @ApiResponse({status: 200, type: Card})
   @ApiParam({name: 'columnId', type: 'number', description: 'Unique key for column'})
   @Post(':columnId/cards')
-  async createCardForColumn(@Req() request: Request, @Param('columnId') columnId: number, @Body() createCardDto: CreateCardDto) {
+  async createCardForColumn(@Req() request: Request, @Param('columnId', ParseIntPipe) columnId: number, @Body() createCardDto: CreateCardDto) {
     const token = request.headers.authorization.split(' ')[1];
     return this.columnCardsService.createCardForColumn(createCardDto, columnId, token);
   }
@@ -24,7 +24,7 @@ export class ColumnCardsController {
   @ApiResponse({status: 200, type: [Card]})
   @ApiParam({name: 'columnId', type: 'number', description: 'Unique key for column'})
   @Get(':columnId/cards')
-  async getAllCardsForColumn(@Param('columnId') columnId: number) {
+  async getAllCardsForColumn(@Param('columnId', ParseIntPipe) columnId: number) {
     return this.columnCardsService.getAllCardsForColumn(columnId);
   }
 }
