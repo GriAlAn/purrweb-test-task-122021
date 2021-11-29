@@ -1,6 +1,7 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { BelongsTo, Column, DataType, ForeignKey, Model, Table } from 'sequelize-typescript';
 import { User } from '../users/user.model';
+import { Column as _Column } from '../columns/column.model';
 
 interface CardCreationProps {
   title: string;
@@ -27,4 +28,11 @@ export class Card extends Model<Card, CardCreationProps> {
 
   @BelongsTo(() => User)
   user: User;
+
+  @Column({type: DataType.INTEGER})
+  @ForeignKey(() => _Column)
+  columnId: number;
+
+  @BelongsTo(() => _Column)
+  column: _Column
 }

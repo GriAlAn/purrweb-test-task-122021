@@ -15,6 +15,9 @@ import { CardsService } from './cards.service';
     UsersModule,
     AuthModule,
   ],
+  exports: [
+    CardsService,
+  ],
 })
 export class CardsModule {
 }

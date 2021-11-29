@@ -8,16 +8,7 @@ import { UpdateCardDto } from './dto/update-card.dto';
 
 @Injectable()
 export class CardsService {
-  constructor(@InjectModel(Card) private cardRepository: typeof Card, @InjectModel(User) private userRepository: typeof User, private authService: AuthService) {
-  }
-
-  async createCard(dto: CreateCardDto, token: string) {
-    const userId = Number(this.authService.getUserIdByToken(token));
-    const user = await this.userRepository.findByPk(userId);
-    const card = await this.cardRepository.create(dto);
-    await card.$set('user', userId);
-    card.user = user;
-    return card;
+  constructor(@InjectModel(Card) private cardRepository: typeof Card, @InjectModel(User) private userRepository: typeof User) {
   }
 
   async getOneCard(id: number) {

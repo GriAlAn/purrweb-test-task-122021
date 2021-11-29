@@ -11,14 +11,6 @@ export class CardsController {
   constructor(private cardsService: CardsService) {
   }
 
-  @ApiOperation({summary: 'Create card'})
-  @ApiResponse({status: 200, type: Card})
-  @Post()
-  async createCard(@Req() request: Request, @Body() createCardDto: CreateCardDto) {
-    const token = request.headers.authorization.split(' ')[1];
-    return this.cardsService.createCard(createCardDto, token);
-  }
-
   @ApiOperation({summary: 'Get one card'})
   @ApiResponse({status: 200, type: Card})
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for card'})
