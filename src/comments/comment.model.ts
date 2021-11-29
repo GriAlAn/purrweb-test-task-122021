@@ -4,7 +4,7 @@ import { Card } from '../cards/card.model';
 import { User } from '../users/user.model';
 
 interface CommentCreationProps {
-  title: string;
+  body: string;
 }
 
 @Table({tableName: 'comments'})
@@ -13,7 +13,7 @@ export class Comment extends Model<Comment, CommentCreationProps> {
   @Column({type: DataType.INTEGER, unique: true, autoIncrement: true, primaryKey: true})
   id: number;
 
-  @ApiProperty({example: 'Title', description: 'Comment body'})
+  @ApiProperty({example: 'Body', description: 'Comment body'})
   @Column({type: DataType.STRING, allowNull: false})
   body: string;
 
