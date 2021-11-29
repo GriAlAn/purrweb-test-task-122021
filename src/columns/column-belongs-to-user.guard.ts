@@ -30,7 +30,7 @@ export class ColumnBelongsToUserGuard implements CanActivate {
 
       const user = this.jwtService.verify<User>(token);
       const columnId = Number(request.params.id);
-      return this.columnsService.isColumnBelongsToUser(user.id, columnId);
+      return this.columnsService.isColumnBelongsToUser(columnId, user.id);
     } catch (e) {
       throw new UnauthorizedException('User not authorized');
     }
