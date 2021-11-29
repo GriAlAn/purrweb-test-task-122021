@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Put, Req, Post, UseGuards } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Put, Req, Post, UseGuards, ParseIntPipe } from '@nestjs/common';
 import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { Request } from 'express';
 import { AuthGuard } from 'src/auth/auth.guard';
@@ -27,7 +27,7 @@ export class ColumnsController {
   @ApiResponse({status: 200, type: Column})
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for column'})
   @Get(':id')
-  async getOneColumnById(@Param('id') id: number) {
+  async getOneColumnById(@Param('id', ParseIntPipe) id: number) {
     return this.columnsService.getOneColumn(id);
   }
 
@@ -43,7 +43,7 @@ export class ColumnsController {
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for column'})
   @UseGuards(AuthGuard, ColumnBelongsToUserGuard)
   @Put(':id')
-  updateColumnById(@Param('id') id: number, @Body() updateColumnDto: UpdateColumnDto) {
+  updateColumnById(@Param('id', ParseIntPipe) id: number, @Body() updateColumnDto: UpdateColumnDto) {
     return this.columnsService.updateColumn(id, updateColumnDto);
   }
 
@@ -52,7 +52,7 @@ export class ColumnsController {
   @ApiParam({name: 'id', type: 'number', description: 'Unique key for column'})
   @UseGuards(AuthGuard, ColumnBelongsToUserGuard)
   @Delete(':id')
-  async deleteColumnById(@Param('id') id: number) {
+  async deleteColumnById(@Param('id', ParseIntPipe) id: number) {
     return this.columnsService.deleteColumn(id)
   }
 }
