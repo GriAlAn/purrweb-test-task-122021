@@ -1,11 +1,12 @@
 import { Body, Controller, Delete, Get, Param, ParseIntPipe, Put, UseGuards } from '@nestjs/common';
-import { ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
+import { ApiOperation, ApiParam, ApiResponse, ApiTags } from '@nestjs/swagger';
 import { AuthGuard } from 'src/auth/auth.guard';
 import { CommentBelongsToUserGuard } from './comment-belongs-to-user.guard';
 import { Comment } from './comment.model';
 import { CommentsService } from './comments.service';
 import { UpdateCommentDto } from './dto/update-comment.dto';
 
+@ApiTags('Comments')
 @Controller('comments')
 export class CommentsController {
   constructor(private commentsService: CommentsService) {
