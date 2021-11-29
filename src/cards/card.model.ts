@@ -29,6 +29,7 @@ export class Card extends Model<Card, CardCreationProps> {
   @BelongsTo(() => User)
   user: User;
 
+  @ApiProperty({example: '1', description: 'Key to column'})
   @Column({type: DataType.INTEGER})
   @ForeignKey(() => _Column)
   columnId: number;
