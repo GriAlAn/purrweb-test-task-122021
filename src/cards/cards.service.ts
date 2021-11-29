@@ -29,4 +29,9 @@ export class CardsService {
     const card = await this.cardRepository.findByPk(id);
     return card.destroy();
   }
+
+  async isCardBelongsToUser(cardId: number, userId: number) {
+    const card = await this.cardRepository.findOne({where: {id: cardId}, include: {all: true}})
+    return card.user.id === userId;
+  }
 }
