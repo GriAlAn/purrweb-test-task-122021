@@ -25,7 +25,6 @@ export class User extends Model<User, UserCreationProps> {
   @HasMany(() => _Column)
   columns: _Column[]
 
-
   @HasMany(() => Card)
   cards: Card[]
 }
